@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>School Feeding Programme NT FBM</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Leaflet CSS et JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <style>
+        #map {
+            height: 90vh;
+            width: 100%;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        h2 {
+            text-align: center;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Carte des cantines scolaires – Madagascar</h2>
+<div id="map"></div>
+
+<script>
+    var map = L.map('map').setView([-22.1, 46.8], 9);
+
+    // Fond de carte
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Données des écoles (extraites de ton tableau)
+    var cantines = [
+        { nom: "EPP Soatsihadino", lat: -22.1343027778, lon: 46.7935335556, sfo: "Noeline" },
+        { nom: "EPP Bedita", lat: -22.110825, lon: 46.7431861111, sfo: "Noeline" },
+        { nom: "EPP Tanambao", lat: -22.1370027778, lon: 46.8031861111, sfo: "Tsaralaza" },
+        { nom: "EPP Vohitsokaka", lat: -22.0988611111, lon: 46.7958916667, sfo: "Noeline" },
+        { nom: "EPP Ambobinahomparina", lat: -22.1175083333, lon: 46.7973388889, sfo: "Olivier" },
+        { nom: "EPP Tanamborina", lat: -22.0948888889, lon: 46.7853888889, sfo: "Tsaralaza" },
+        { nom: "EPP FENOKA", lat: -22.1093611111, lon: 46.8008388889, sfo: "Arisoa" },
+        { nom: "EPP Ihozahira", lat: -22.183775, lon: 46.8068194444, sfo: "Mihaja" },
+        { nom: "EPP Ambalamahaso", lat: -22.091333, lon: 46.7791666667, sfo: "Olivier" },
+        { nom: "EPP Ankiboka", lat: -22.1662638889, lon: 46.8231388889, sfo: "Arisoa" }
+    ];
+
+    // Ajout des marqueurs
+    cantines.forEach(function(c) {
+        L.marker([c.lat, c.lon]).addTo(map)
+            .bindPopup(`<b>${c.nom}</b><br>SFO: ${c.sfo}`);
+    });
+</script>
+
+</body>
+</html>
